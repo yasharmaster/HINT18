@@ -8,9 +8,11 @@ Use following commands -
 ```
 npm install
 
-truffle compile
+truffle compile (in windows use truffle.cmd compile)
 
-truffle migrate
+launch ganache
+
+truffle migrate (in windows use truffle.cmd migrate)
 
 npm run dev
 ```
