@@ -41,7 +41,7 @@ window.App = {
       account = accounts[0];
       console.log(account);
 
-        // self.refreshBalance();
+        self.refreshEntries();
     });
 
   },
@@ -66,12 +66,38 @@ window.App = {
       return meta.addEntry(content, {from: account});
     }).then(function() {
       self.setStatus("Diary entry added!");
-      // self.refreshEntries();
+      self.refreshEntries();
     }).catch(function(e) {
       console.log(e);
       self.setStatus("Error sending coin; see log.");
     });
+  },
+
+  refreshEntries: function() {
+    var self = this;
+
+    var meta;
+    Diary.deployed().then(function(instance) {
+      meta = instance;
+      return meta.getEntries.call({from: account});
+    }).then(function(value) {
+      // var entries_element = document.getElementById("all-entries");
+      var str_array = value.split(',');
+      var ul = document.getElementById('all-entries');
+      var li;
+      for(var i = 0; i < str_array.length; i++) {
+        // Trim the excess whitespace.
+        str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
+        li = document.createElement('li'); 
+        li.appendChild(document.createTextNode(str_array[i])); 
+        ul.appendChild(li);
+      }
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("Error getting diary entries; see log.");
+    });
   }
+
 
   // refreshBalance: function() {
   //   var self = this;
