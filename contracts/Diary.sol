@@ -15,7 +15,7 @@ contract Diary {
   function Diary() public {
     owner = msg.sender;
     numEntries = 0;
-    passPhrase = "$$$";
+    passPhrase = "default";
   }
 
   function addEntry(string content) public returns (bool success) {

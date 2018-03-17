@@ -41,9 +41,19 @@ window.App = {
       account = accounts[0];
       console.log(account);
       
-      self.refreshEntries();
+      // self.refreshEntries();
     });
 
+  },
+
+  login: function(){
+    $("#authentication").addClass("d-none");
+    $("#new-diary-entry").removeClass("d-none");
+  },
+
+  reloadAndLogin: function(){
+    location.reload();
+    login();
   },
 
 verify: function() {
@@ -56,17 +66,16 @@ verify: function() {
       return meta.getPassPhrase.call({from: account});
     }).then(function(pass) {
       console.log("Pass = " + pass);
-      if(pass == "$$$") {
+      if(pass == "default") {
         console.log("Unregistered");
         meta.setPassPhrase(passphrase, {from: account});
         self.setAuthStatus("New user successfully registered.");
-        $("#authentication").addClass("d-none");
-        $("#new-diary-entry").removeClass("d-none");
+        self.login();
       } else if(pass == passphrase) {
         console.log("Matched");
-        self.setStatus("Successfully logged in.");
-        $("#authentication").addClass("d-none");
-        $("#new-diary-entry").removeClass("d-none");
+        self.setAuthStatus("Successfully logged in.");
+        self.login();
+        self.refreshEntries();
       } else {
         self.setAuthStatus("Passphrase doest not match!");
       }
@@ -75,6 +84,8 @@ verify: function() {
       self.setAuthStatus("Problem in verification; see log.");
     });
   },
+
+
 
   setDiaryStatus: function(message) {
     var status = document.getElementById("diary-status");
@@ -93,7 +104,7 @@ verify: function() {
     var content = document.getElementById("new-content").value;
     console.log(content);
 
-    this.setStatus("Adding entry... (please wait)");
+    this.setDiaryStatus("Adding entry... (please wait)");
 
     var meta;
     Diary.deployed().then(function(instance) {
@@ -103,7 +114,6 @@ verify: function() {
     }).then(function() {
       self.setDiaryStatus("Diary entry added!");
       self.refreshEntries();
-      location.reload();
     }).catch(function(e) {
       console.log(e);
       self.setDiaryStatus("Error sending coin; see log.");
@@ -130,6 +140,7 @@ verify: function() {
         li.appendChild(document.createTextNode(str_array[i])); 
         ul.appendChild(li);
       }
+
     }).catch(function(e) {
       console.log(e);
       self.setDiaryStatus("Error getting diary entries; see log.");
