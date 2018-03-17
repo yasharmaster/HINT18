@@ -9,13 +9,14 @@ import { default as contract } from 'truffle-contract'
 import diary_artifacts from '../../build/contracts/Diary.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
-var Diary = contract(diary_artifacts);
+// var Diary = contract(diary_artifacts);
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
 // For application bootstrapping, check out window.addEventListener below.
 var accounts;
 var account;
+var Diary = contract(diary_artifacts);
 
 window.App = {
   start: function() {
@@ -38,15 +39,39 @@ window.App = {
 
       accounts = accs;
       account = accounts[0];
+      console.log(account);
 
-      // self.refreshBalance();
+        // self.refreshBalance();
     });
+
   },
 
   setStatus: function(message) {
     var status = document.getElementById("status");
     status.innerHTML = message;
   },
+
+  addDiaryEntry: function() {
+    var self = this;
+
+    var content = document.getElementById("new-content").value;
+    console.log(content);
+
+    this.setStatus("Adding entry... (please wait)");
+
+    var meta;
+    Diary.deployed().then(function(instance) {
+      meta = instance;
+      console.log("at line 62")
+      return meta.addEntry(content, {from: account});
+    }).then(function() {
+      self.setStatus("Diary entry added!");
+      // self.refreshEntries();
+    }).catch(function(e) {
+      console.log(e);
+      self.setStatus("Error sending coin; see log.");
+    });
+  }
 
   // refreshBalance: function() {
   //   var self = this;
