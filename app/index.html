@@ -7,22 +7,53 @@
   <script src="./app.js"></script>
 </head>
 <body>
-  <h1>Interactive Diary - Powered by blockchain</h1>
+  <h1><i>Interactive Diary</i> - Powered by Ethereum Blockchain</h1>
 
   <br>
-  <h1>Enter Diary Entry</h1>
-  <br><label for="content">Content:</label><input type="text" id="new-content" placeholder="e.g., I had a good day"></input>
-  <br><br><button id="send" onclick="App.addDiaryEntry()">Submit</button>
+  <h2>Enter Diary Entry</h2>
+  <br><label for="content">Content:</label><input class="" type="text" id="new-content" placeholder="e.g., I had a good day"></input>
+  <br><br>
+  <button class="btn btn-lg btn-info" onclick="startRecognition();">Recognize text </button>
+  <button class="btn btn-lg btn-info" onclick="stopRecognition();">Stop recognition</button>
+  <button class="btn btn-lg btn-primary" id="send" onclick="App.addDiaryEntry()">Submit</button>
   <br><br>
   <span id="status"></span>
   <br>
-
+<hr>
   <div class="container">
     <h2>Previous Diary Entries</h2>
     <ul id="all-entries"></ul>
   </div>
 
 
+  <script src="./artyom.js"></script>
+<script type="text/javascript">
+  var settings = {
+    continuous:true, // Don't stop never because i have https connection
+    onResult:function(text){
+        // text = the recognized text
+        document.getElementById('all-entries');
+        console.log(text);
+    },
+    onStart:function(){
+        console.log("Dictation started by the user");
+    },
+    onEnd:function(){
+        alert("Dictation stopped by the user");
+    }
+  };
+
+  var UserDictation = artyom.newDictation(settings);
+
+  console.log(UserDictation);
+  function startRecognition(){
+    UserDictation.start();
+  }
+
+  function stopRecognition(){
+    UserDictation.stop();
+  }
+</script>
  
 </body>
 </html>
