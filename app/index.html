@@ -3,13 +3,30 @@
 <head>
   <title>Interactive Diary - Powered by blockchain</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="./app.js"></script>
 </head>
 <body>
+
+
+
+
   <h1><i>Interactive Diary</i> - Powered by Ethereum Blockchain</h1>
 
-  <br>
+<div id="authentication">
+  <h2>Enter Passphrase</h2>
+  <br><label for="passphrase">Phrase:</label><input class="" type="password" id="passhrase-input" placeholder="e.g., password"></input>
+  <br><br>
+  <button id="passphrase-submit" class="btn btn-lg btn-success" onclick="App.verify()">Login</button>
+<span id="auth-status"></span>
+
+</div>
+
+
+<div id="new-diary-entry" class="d-none">
+    <br>
   <h2>Enter Diary Entry</h2>
   <br><label for="content">Content:</label><input class="" type="text" id="new-content" placeholder="e.g., I had a good day"></input>
   <br><br>
@@ -18,14 +35,14 @@
   <button class="btn btn-lg btn-primary" id="send" onclick="App.addDiaryEntry()">Submit</button>
   <br><br>
    <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
-  <span id="status"></span>
   <br>
+  <span id="diary-status"></span>
 <hr>
   <div class="container">
     <h2>Previous Diary Entries</h2>
     <ul id="all-entries"></ul>
   </div>
+</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>

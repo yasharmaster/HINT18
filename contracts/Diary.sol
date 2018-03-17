@@ -2,7 +2,7 @@ pragma solidity ^0.4.17;
 
 contract Diary {
   address private owner;
-  string private testPhrase;
+  string public passPhrase;
 
   struct Entry {
     string content;
@@ -12,10 +12,10 @@ contract Diary {
   uint private numEntries;
 
   // Constructor
-  function Diary(/*string encryptedTestPhrase*/) public {
+  function Diary() public {
     owner = msg.sender;
     numEntries = 0;
-    testPhrase = "password";
+    passPhrase = "$$$";
   }
 
   function addEntry(string content) public returns (bool success) {
@@ -24,6 +24,10 @@ contract Diary {
     entries[numEntries].content = content;
     numEntries++;
     return true;
+  }
+
+  function setPassPhrase(string text) public {
+    passPhrase = text;
   }
 
   function setEntry(uint index, string content) public returns (bool success) {
@@ -68,8 +72,8 @@ contract Diary {
     return string(result);
   }
 
-  function getTestPhrase() public view returns (string phrase) {
-    return testPhrase;
+  function getPassPhrase() public view returns (string phrase) {
+    phrase = passPhrase;
   }
 
   function getOwner() public view returns (address ownerAddress) {

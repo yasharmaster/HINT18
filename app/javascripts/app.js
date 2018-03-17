@@ -46,8 +46,44 @@ window.App = {
 
   },
 
-  setStatus: function(message) {
-    var status = document.getElementById("status");
+verify: function() {
+    var self = this;
+    var passphrase = document.getElementById("passhrase-input").value;
+    this.setAuthStatus("Verifying passphrase... (please wait)");
+    var meta;
+    Diary.deployed().then(function(instance) {
+      meta = instance;
+      return meta.getPassPhrase.call({from: account});
+    }).then(function(pass) {
+      console.log("Pass = " + pass);
+      if(pass == "$$$") {
+        console.log("Unregistered");
+        meta.setPassPhrase(passphrase, {from: account});
+        self.setAuthStatus("New user successfully registered.");
+        $("#authentication").addClass("d-none");
+        $("#new-diary-entry").removeClass("d-none");
+      } else if(pass == passphrase) {
+        console.log("Matched");
+        self.setStatus("Successfully logged in.");
+        $("#authentication").addClass("d-none");
+        $("#new-diary-entry").removeClass("d-none");
+      } else {
+        self.setAuthStatus("Passphrase doest not match!");
+      }
+    }).catch(function(e) {
+      console.log(e);
+      self.setAuthStatus("Problem in verification; see log.");
+    });
+  },
+
+  setDiaryStatus: function(message) {
+    var status = document.getElementById("diary-status");
+    status.innerHTML = message;
+  },
+
+
+  setAuthStatus: function(message) {
+    var status = document.getElementById("auth-status");
     status.innerHTML = message;
   },
 
@@ -65,12 +101,12 @@ window.App = {
       console.log("at line 62")
       return meta.addEntry(content, {from: account});
     }).then(function() {
-      self.setStatus("Diary entry added!");
+      self.setDiaryStatus("Diary entry added!");
       self.refreshEntries();
       location.reload();
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("Error sending coin; see log.");
+      self.setDiaryStatus("Error sending coin; see log.");
     });
   },
 
@@ -96,7 +132,7 @@ window.App = {
       }
     }).catch(function(e) {
       console.log(e);
-      self.setStatus("Error getting diary entries; see log.");
+      self.setDiaryStatus("Error getting diary entries; see log.");
     });
   }
 
