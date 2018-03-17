@@ -18,36 +18,32 @@ contract Diary {
     testPhrase = encryptedTestPhrase;
   }
 
-  function addEntry(string date, string entry) public returns (bool success) {
+  function addEntry(string content) public returns (bool success) {
     if (msg.sender != owner) 
       return;
+    entries[numEntries].content = content;
     numEntries++;
-    
-    entries[date].content = entry;
     return true;
   }
 
-  function editEntry(string date, string newContent) public returns (bool success) {
-    if (msg.sender != owner) 
-      return;
+  function setEntry(uint index, string content) public returns (bool success) {
+    if (msg.sender != owner) return;
 
-    Entry storage entry = entries[date];
+    Entry storage entry = entries[index];
 
-    if (keccak256(newContent) != keccak256(entry.content)) {
-      entry.content = newContent;
+    if (keccak256(content) != keccak256(entry.content)) {
+      login.content = content;
     }
 
     return true;
   }
 
-  function getEntry(string date) public view returns (string content) {
-    content = entries[date].content;
+  function getEntry(string index) public view returns (string content) {
+    content = entries[index].content;
   }
 
-  // to be shown in GUI
-/*  function getEntries() public view returns (string allLogins) {
-    if (numEntries == 0) 
-      return '';
+  function getEntries() public view returns (string allEntries) {
+    if (numEntries == 0) return '';
 
     uint totalLength = 0;
     for (uint i=0; i < numEntries; i++) {
@@ -57,9 +53,9 @@ contract Diary {
     bytes memory result = bytes(new string(totalLength));
     uint counter = 0;
     for (i=0; i < numEntries; i++) {
-      bytes memory name = bytes(logins[i].name);
-      for (uint x=0; x < name.length; x++) {
-        result[counter] = name[x];
+      bytes memory content = bytes(entries[i].content);
+      for (uint x=0; x < content.length; x++) {
+        result[counter] = content[x];
         counter++;
       }
 
@@ -70,7 +66,7 @@ contract Diary {
     }
 
     return string(result);
-  }*/
+  }
 
   function getTestPhrase() public view returns (string phrase) {
     return testPhrase;
@@ -81,7 +77,6 @@ contract Diary {
   }
 
   function kill() public {
-    if (msg.sender == owner) 
-      selfdestruct(owner);
+    if (msg.sender == owner) selfdestruct(owner);
   }
 }
