@@ -13,10 +13,11 @@
   <h2>Enter Diary Entry</h2>
   <br><label for="content">Content:</label><input class="" type="text" id="new-content" placeholder="e.g., I had a good day"></input>
   <br><br>
-  <button class="btn btn-lg btn-info" onclick="startRecognition();">Recognize text </button>
-  <button class="btn btn-lg btn-info" onclick="stopRecognition();">Stop recognition</button>
+  <button id="start-record-btn" class="btn btn-lg btn-info">Recognize text </button>
+  <button id="pause-record-btn" class="btn btn-lg btn-info">Stop recognition</button>
   <button class="btn btn-lg btn-primary" id="send" onclick="App.addDiaryEntry()">Submit</button>
   <br><br>
+   <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
   <span id="status"></span>
   <br>
 <hr>
@@ -25,35 +26,6 @@
     <ul id="all-entries"></ul>
   </div>
 
-
-  <script src="./artyom.js"></script>
-<script type="text/javascript">
-  var settings = {
-    continuous:true, // Don't stop never because i have https connection
-    onResult:function(text){
-        // text = the recognized text
-        document.getElementById('all-entries');
-        console.log(text);
-    },
-    onStart:function(){
-        console.log("Dictation started by the user");
-    },
-    onEnd:function(){
-        alert("Dictation stopped by the user");
-    }
-  };
-
-  var UserDictation = artyom.newDictation(settings);
-
-  console.log(UserDictation);
-  function startRecognition(){
-    UserDictation.start();
-  }
-
-  function stopRecognition(){
-    UserDictation.stop();
-  }
-</script>
- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>
