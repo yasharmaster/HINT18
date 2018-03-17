@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Diary - Powered by blockchain</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="./app.js"></script>
+</head>
+<body>
+
+  <br>
+  <h2>Enter Diary Entry</h2>
+  <br><label for="content">Content:</label><input class="" type="text" id="new-content" placeholder="e.g., I had a good day"></input>
+  <br><br>
+  <button id="start-record-btn" class="btn btn-lg btn-info">Recognize text </button>
+  <button id="pause-record-btn" class="btn btn-lg btn-info">Stop recognition</button>
+  <button class="btn btn-lg btn-primary" id="send" onclick="App.addDiaryEntry()">Submit</button>
+  <br><br>
+   <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+  <br>
+  <span id="diary-status"></span>
+<hr>
+  <div class="container">
+    <h2>Previous Diary Entries</h2>
+    <ul id="all-entries"></ul>
+  </div>
+</div>
+
+</body>
+</html>

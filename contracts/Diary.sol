@@ -11,6 +11,7 @@ contract Diary {
   mapping (uint => Entry) private entries;
   uint private numEntries;
 
+  event Entries(string entries);
   // Constructor
   function Diary() public {
     owner = msg.sender;
@@ -68,8 +69,9 @@ contract Diary {
         counter++;
       }
     }
-
+    Entries(result);
     return string(result);
+
   }
 
   function getPassPhrase() public view returns (string phrase) {

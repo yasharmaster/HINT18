@@ -46,16 +46,6 @@ window.App = {
 
   },
 
-  login: function(){
-    $("#authentication").addClass("d-none");
-    $("#new-diary-entry").removeClass("d-none");
-  },
-
-  reloadAndLogin: function(){
-    location.reload();
-    login();
-  },
-
 verify: function() {
     var self = this;
     var passphrase = document.getElementById("passhrase-input").value;
@@ -69,12 +59,14 @@ verify: function() {
       if(pass == "default") {
         console.log("Unregistered");
         meta.setPassPhrase(passphrase, {from: account});
+        location.href = "diary.html";
         self.setAuthStatus("New user successfully registered.");
-        self.login();
+        // self.login();
       } else if(pass == passphrase) {
         console.log("Matched");
+        location.href = "diary.html";
         self.setAuthStatus("Successfully logged in.");
-        self.login();
+        // self.login();
         self.refreshEntries();
       } else {
         self.setAuthStatus("Passphrase doest not match!");
