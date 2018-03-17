@@ -8,14 +8,14 @@ contract Diary {
     string content;
   }
 
-  mapping (string => Entry) private entries;
+  mapping (uint => Entry) private entries;
   uint private numEntries;
 
   // Constructor
-  function Diary(string encryptedTestPhrase) public {
+  function Diary(/*string encryptedTestPhrase*/) public {
     owner = msg.sender;
     numEntries = 0;
-    testPhrase = encryptedTestPhrase;
+    testPhrase = "password";
   }
 
   function addEntry(string content) public returns (bool success) {
@@ -32,13 +32,13 @@ contract Diary {
     Entry storage entry = entries[index];
 
     if (keccak256(content) != keccak256(entry.content)) {
-      login.content = content;
+      entry.content = content;
     }
 
     return true;
   }
 
-  function getEntry(string index) public view returns (string content) {
+  function getEntry(uint index) public view returns (string content) {
     content = entries[index].content;
   }
 
