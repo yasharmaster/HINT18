@@ -1,5 +1,10 @@
-# HINT18 
-A project built in HINT 3.0
+# Sarah 
+
+A blockchain powered interactive journal
+
+## Demo
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/lr9mZSmilvo/0.jpg)](https://www.youtube.com/watch?v=lr9mZSmilvo)
 
 ## Run Project
 
