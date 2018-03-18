@@ -90,9 +90,6 @@ window.App = {
       for(var i = 0; i < str_array.length; i++) {
         // Trim the excess whitespace.
         str_array[i] = str_array[i].replace(/^\s*/, "").replace(/\s*$/, "");
-        // li = document.createElement('li'); 
-        // li.appendChild(document.createTextNode(str_array[i])); 
-        // ul.appendChild(li);
         li = document.createElement('div');
         li.className="card";
         var temp = document.createElement('div');
