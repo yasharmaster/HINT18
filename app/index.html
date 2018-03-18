@@ -2,15 +2,60 @@
 <html>
 <head>
   <title>Interactive Diary - Powered by blockchain</title>
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+ <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Open+Sans:400,700|Raleway:200,300,400,700|Roboto+Condensed" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style type="text/css">
+    .fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+body{
+  color:#fff;
+  font-family: 'Raleway', serif;
+}
+.heading{
+  color:#fff;
+  font-size: 2.5em;
+}
+#subtext {
+  font-size:0.8em;
+  font-weight: 200;
+}
+.fullscreen-bg__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+  </style>
   <script src="./app.js"></script>
 </head>
 <body>
-  <h1><i>Interactive Diary</i> - Powered by Ethereum Blockchain</h1>
+
+
+<div class="fullscreen-bg">
+    <video loop muted autoplay poster="img/videoframe.jpg" class="fullscreen-bg__video">
+        <source src="https://d27shkkua6xyjc.cloudfront.net/videos/maaemo-film-2.mp4?mtime=20141113185431" type="video/mp4">
+    </video>
+</div>
+<div class="container">
+   <div class=" row">
+     <div class="heading">
+       <p style="font-weight: 700;">Sarah <span id="subtext">An Interactive Journal powered by Ethereum Blockchain Technology</span></p>
+     </div>
+  </div>
+</div>
 
   <br>
-  <h2>Enter Diary Entry</h2>
+  <div class="row">
+        <p style="font-weight: 400; font-size:1.5em;">Enter Diary Entry</p>
+      </div>
   <br><label for="content">Content:</label><input class="" type="text" id="new-content" placeholder="e.g., I had a good day"></input>
   <br><br>
   <button id="start-record-btn" class="btn btn-lg btn-info">Recognize text </button>
@@ -23,6 +68,7 @@
 <hr>
   <div class="container">
     <h2>Previous Diary Entries</h2>
+    
     <ul id="all-entries"></ul>
   </div>
 

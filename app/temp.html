@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive Diary - Powered by blockchain</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="./app.js"></script>
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed|Open+Sans:400,700|Raleway:200,300,400,700|Roboto+Condensed" rel="stylesheet">
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+    font-size: 17px;
+    color: #fff;
+}
+
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+}
+
+.content {
+    position: fixed;
+    bottom: 0;
+    /*background: rgba(0, 0, 0, 0.5);*/
+  font-family: 'Raleway', serif;
+  margin-left: 15%;
+
+    font
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+}
+.heading{
+  color:#fff;
+  font-size: 2.5em;
+}
+#subtext {
+  font-size:0.8em;
+  font-weight: 200;
+}
+button{
+  margin-left:20px;
+}
+label {
+  color :#fff;
+}
+</style>
+
+
+</head>
+<body>
+<video autoplay muted loop id="myVideo">
+  <source src="https://d27shkkua6xyjc.cloudfront.net/videos/maaemo-film-2.mp4?mtime=20141113185431" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<div class="content container">
+  <div class="heading row">
+      <p style="font-weight: 700;">Sarah <span id="subtext">An Interactive Journal powered by Ethereum Blockchain Technology</span></p>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        <p style="font-weight: 400; font-size:1.5em;">Enter Diary Entry</p>
+      </div>
+      <div class="row">
+        <input class="" type="text" id="new-content" placeholder="e.g., I had a good day"></input>
+        <button class="btn btn-lg btn-primary" id="send" onclick="App.addDiaryEntry()">Submit</button>
+      </div>
+      <br>
+      <div class="row">
+        <button id="start-record-btn" class="btn btn-lg btn-info">Speak</button>
+        <button id="pause-record-btn" class="btn btn-lg btn-info">Stop Speaking</button>
+      </div>
+    </div>
+    
+  </div>
+  
+   <p id="recording-instructions">Press the <strong>Start Recognition</strong> button and allow access.</p>
+  <span id="status"></span>
+  <br>
+<hr>
+  <div class="container">
+    <h2>Previous Diary Entries</h2>
+    <ul id="all-entries"></ul>
+  </div>
+</div>
+
+  
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>
